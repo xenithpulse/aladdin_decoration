@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 // Styled components for the About section
 const AboutSection = styled.section`
@@ -90,7 +91,13 @@ const AboutUs = () => {
 
         {/* Right side with image */}
         <div className="about-image">
-          <img src="https://aladdin-bucket0.s3.amazonaws.com/Frame+37.png" alt="About Us Image" />
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+37.png"
+          alt="About Us Image"
+          width={900} // Desired width
+          height={500} // Desired height
+          style={{ objectFit: 'cover' }} // Optional: maintain aspect ratio
+        />
         </div>
       </div>
     </AboutSection>

@@ -2,6 +2,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
+import Image from "next/image";
 
 const CarouselContainer = styled.div`
   margin-top: 62px; /* Adjusts based on header height */
@@ -21,42 +22,62 @@ const NextJsCarousel = () => {
         stopOnHover={false}           // Keeps auto slide even when hovering over the carousel
         showIndicators={true}
       >
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+40.png"
-            alt="image2"
-          />
-        </div>
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+35.png"
-            alt="image3"
-          />
-        </div>
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+36.png"
-            alt="image5"
-          />
-        </div>
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+39.png"
-            alt="image6"
-          />
-        </div>
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+34.png"
-            alt="image7"
-          />
-        </div>
-        <div>
-          <img
-            src="https://aladdin-bucket0.s3.amazonaws.com/Frame+38.png"
-            alt="image8"
-          />
-        </div>
+
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+40.png"
+          alt="image2"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+35.png"
+          alt="image3"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+36.png"
+          alt="image5"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+39.png"
+          alt="image6"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+34.png"
+          alt="image7"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+      <div>
+        <Image
+          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+38.png"
+          alt="image8"
+          width={2000} // Set to 2000px width
+          height={750} // Set to 750px height
+          style={{ objectFit: 'cover' }} // Optional: to maintain aspect ratio
+        />
+      </div>
+
       </Carousel>
     </CarouselContainer>
   );

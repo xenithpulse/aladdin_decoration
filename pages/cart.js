@@ -10,6 +10,8 @@ import Input from "@/components/Input";
 import { useRouter } from "next/router";
 import { keyframes } from "styled-components";
 import Footer from "@/components/footer";
+import Image from 'next/image'
+
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -281,7 +283,7 @@ export default function CartPage() {
       clearCart();
       localStorage.removeItem('cartProducts');
     }
-  }, []);
+  }, [clearCart]); // added clearCart as a dependency
 
 
   const validateInputs = () => {
@@ -412,7 +414,13 @@ if (isSuccess) {
                     <ProductInfoCell>
                       <ProductImageBox>
                         {product.image ? (
-                          <img src={product.image} alt={product.title} />
+                          <Image
+                            src={product.image}
+                            alt={product.title}
+                            width={500} // Set appropriate width
+                            height={500} // Set appropriate height
+                            layout="responsive" // You can adjust layout as needed
+                          />
                         ) : (
                           <span>No image available</span>
                         )}

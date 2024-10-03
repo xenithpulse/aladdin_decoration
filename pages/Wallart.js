@@ -6,24 +6,16 @@ import ProductsGrid from "@/homepagegrid";
 import Title from "@/components/Title";
 import { Category } from "@/models/Category"; // Ensure this path is correct
 
-import styled from "styled-components";
-const Wallartdiv = styled.div`
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
-  
-  min-height : 100vh;
-`;
 
 
 export default function Wallart({ products }) {
   return (
     <>
       <Header />
-        <Wallartdiv>
+        <Center>
           <Title style={{ marginTop: '80px'}}>Explore Wall Arts</Title> {/* Adjust margin here */}
           <ProductsGrid products={products} />
-        </Wallartdiv>
+        </Center>
     </>
   );
 }

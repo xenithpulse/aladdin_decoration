@@ -6,25 +6,18 @@ import { Category } from "@/models/Category"; // Ensure this path is correct
 import ProductsGrid from "@/homepagegrid";
 import Title from "@/components/Title";
 import styled from "styled-components";
-const Wallclockdiv = styled.div`
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 20px;
-  
-  min-height : 100vh;
-`;
+import Footer from "@/components/footer";
 
 export default function ProductsPage({ products }) {
   return (
     <>
       <Header />
-      <Wallclockdiv>
+      <Center>
         <Title style={{ marginTop: '80px' }}>Explore Wall Clocks</Title> {/* Adjust margin here */}
         <ProductsGrid products={products} />
-
-      </Wallclockdiv>
+      </Center>
+      <Footer/>
     </>
-
   );
 }
 

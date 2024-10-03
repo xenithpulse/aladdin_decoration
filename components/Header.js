@@ -7,6 +7,7 @@ import BarsIcon from "@/components/icons/Bars";
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 // Styled component for the header
 const StyledHeader = styled.header`
@@ -19,7 +20,6 @@ const StyledHeader = styled.header`
   z-index: 5; /* Ensure header is on top */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
   transition: top 0.3s; /* Smooth transition when hiding/showing */
-  
 `;
 
 // Logo styling
@@ -27,7 +27,7 @@ const Logo = styled(Link)`
   color: #fff;
   text-decoration: none;
   position: absolute;
-  left: 10px;
+  left: 40px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
@@ -79,7 +79,9 @@ const CartWrapper = styled.div`
 `;
 
 // Navigation menu styling
-const StyledNav = styled.nav`
+const StyledNav = styled.nav.withConfig({
+  shouldForwardProp: (prop) => !['mobileNavActive'].includes(prop), // Filter out the mobileNavActive prop
+})`
   ${({ mobileNavActive }) => mobileNavActive ? `
     display: block;
   ` : `
@@ -159,13 +161,17 @@ export default function Header() {
       }
     }, 10);
   };
+
   return (
     <StyledHeader>
       <Center>
         <Wrapper>
           {/* Logo positioned on the left for larger screens, centered on mobile */}
           <Logo href="/">
-            <img src="https://res-console.cloudinary.com/dcsk6j16i/media_explorer_thumbnails/488b5b96c886ce30d269b220e4de2b8e/detailed" alt="Logo" style={{ height: '30px' }} />
+            <Image src="https://aladdin-bucket0.s3.amazonaws.com/TRANS_ZZOMED.png"
+              alt="Logo"
+              height={35}
+              width={110} />
           </Logo>
 
           {/* Navigation items (hidden on mobile until button is clicked) */}
@@ -173,10 +179,8 @@ export default function Header() {
             <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/wallclocks'}>Wall Clocks</NavLink>
             <NavLink href={'/Wallart'}>Wall Arts</NavLink>
-            <NavLink href="#"  onClick={handleClick} scroll={false}
-            
-            >About Us</NavLink>
-            </StyledNav>
+            <NavLink href="#" onClick={handleClick} scroll={false}>About Us</NavLink>
+          </StyledNav>
 
           {/* Button for toggling mobile navigation */}
           <NavButton onClick={() => setMobileNavActive(prev => !prev)}>

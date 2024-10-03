@@ -5,21 +5,22 @@ export const CartContext = createContext({});
 export function CartContextProvider({ children }) {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
   const [cartProducts, setCartProducts] = useState([]);
-
+  
   useEffect(() => {
     if (cartProducts.length > 0) {
       ls.setItem('cart', JSON.stringify(cartProducts));
       console.log("Cart updated in local storage:", cartProducts);
     }
-  }, [cartProducts]);
-
+  }, [cartProducts, ls]); // Added 'ls' as a dependency
+  
   useEffect(() => {
     if (ls && ls.getItem('cart')) {
-        const storedCart = JSON.parse(ls.getItem('cart'));
-        setCartProducts(storedCart || []); // Ensure it's set to an empty array if null
-        console.log("Cart loaded from local storage:", storedCart);
+      const storedCart = JSON.parse(ls.getItem('cart'));
+      setCartProducts(storedCart || []); // Ensure it's set to an empty array if null
+      console.log("Cart loaded from local storage:", storedCart);
     }
-}, []);
+  }, [ls]); // Added 'ls' as a dependency
+  
 
 
 const addProduct = (productId, selectedOptions) => {

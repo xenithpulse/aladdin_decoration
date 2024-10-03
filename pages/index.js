@@ -6,6 +6,8 @@ import NewProducts from "@/components/NewProducts";
 import AboutUs from "@/components/aboutus";
 import Wallart from "./Wallart";
 import Footer from "@/components/footer";
+import Image from 'next/image';
+
 
 export default function HomePage({ newProducts }) {
   // Filter newProducts to include only those in the "Wall Art" category
@@ -29,20 +31,23 @@ export default function HomePage({ newProducts }) {
           marginBottom: '20px' // Adjust the space below the image (optional)
         }}
       >
-        <img
-          src="https://aladdin-bucket0.s3.amazonaws.com/Frame+33.png"
-          alt="Decorative Image"
-          style={{ 
-            width: '100%', // Ensure responsiveness
-            maxWidth: '1200px', // Max width for larger screens
-            height: 'auto', // Maintain aspect ratio
-            borderRadius: '10px', // Optional: add rounded corners
-            transform: 'translate(1px, 30px)' // Move image right by 20px and down by 30px
-          }}
-        />
+      <Image
+        src="https://aladdin-bucket0.s3.amazonaws.com/Frame+33.png"
+        alt="Decorative Image"
+        width={1200} // Set appropriate max width
+        height={800} // Set appropriate height based on aspect ratio
+        style={{
+          width: '100%', // Ensure responsiveness
+          maxWidth: '1200px', // Max width for larger screens
+          height: 'auto', // Maintain aspect ratio
+          borderRadius: '10px', // Optional: add rounded corners
+          transform: 'translate(1px, 30px)', // Move image right by 1px and down by 30px
+        }}
+      />
       </div>
       <Wallart products={wallArtProducts} />
       <AboutUs />
+      <Footer/>
     </div>
   );
 }

@@ -4,6 +4,15 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'aladdin-bucket0.s3.amazonaws.com',
+        pathname: '/**', // Adjust pathname as needed
+      },
+    ],
+  },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
