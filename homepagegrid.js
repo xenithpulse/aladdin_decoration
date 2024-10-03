@@ -5,7 +5,7 @@ const StyledProductsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two columns layout for mobile devices */
   gap: 10px; /* Space between grid items */
-  margin-left: -15px;
+  margin-left: -17px;
   margin-right: -15px;
   
   @media screen and (min-width: 768px) {

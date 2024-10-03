@@ -1,1 +1,9 @@
-{"/_app":"pages/_app.js","/_error":"pages/_error.js","/_document":"pages/_document.js","/api/cart":"pages/api/cart.js","/api/checkout":"pages/api/checkout.js","/cart":"pages/cart.html","/Wallart":"pages/Wallart.js","/api/hello":"pages/api/hello.js","/":"pages/index.js","/wallclocks":"pages/wallclocks.js","/product/[id]":"pages/product/[id].js","/product/OtherProd":"pages/product/OtherProd.js","/404":"pages/404.html"}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/wallclocks": "pages/wallclocks.js",
+  "/product/[id]": "pages/product/[id].js",
+  "/cart": "pages/cart.js",
+  "/api/cart": "pages/api/cart.js"
+}

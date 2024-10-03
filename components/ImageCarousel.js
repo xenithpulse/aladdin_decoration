@@ -36,7 +36,7 @@ const ThumbnailImage = styled.img`
   }
 
   @media (max-width: 768px) {
-    width: 50px; /* Reduce thumbnail size for smaller screens */
+    width: 35px; /* Reduce thumbnail size for smaller screens */
   }
 `;
 

@@ -65,11 +65,11 @@ padding:0px 0px;
     .about-text {
   
       text-align: center;
+      padding-left: 15px;
     }
 
     .about-image {
       padding-left: 0;
-      margin-top: 20px;
     }
   }
 `;

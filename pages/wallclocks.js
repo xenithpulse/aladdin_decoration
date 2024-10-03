@@ -5,8 +5,7 @@ import { Product } from "@/models/Product";
 import { Category } from "@/models/Category"; // Ensure this path is correct
 import ProductsGrid from "@/homepagegrid";
 import Title from "@/components/Title";
-import styled from "styled-components";
-import Footer from "@/components/footer";
+
 
 export default function ProductsPage({ products }) {
   return (
@@ -16,7 +15,6 @@ export default function ProductsPage({ products }) {
         <Title style={{ marginTop: '80px' }}>Explore Wall Clocks</Title> {/* Adjust margin here */}
         <ProductsGrid products={products} />
       </Center>
-      <Footer/>
     </>
   );
 }
