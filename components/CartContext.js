@@ -9,7 +9,6 @@ export function CartContextProvider({ children }) {
   useEffect(() => {
     if (cartProducts.length > 0) {
       ls.setItem('cart', JSON.stringify(cartProducts));
-      console.log("Cart updated in local storage:", cartProducts);
     }
   }, [cartProducts, ls]); // Added 'ls' as a dependency
   
@@ -17,7 +16,6 @@ export function CartContextProvider({ children }) {
     if (ls && ls.getItem('cart')) {
       const storedCart = JSON.parse(ls.getItem('cart'));
       setCartProducts(storedCart || []); // Ensure it's set to an empty array if null
-      console.log("Cart loaded from local storage:", storedCart);
     }
   }, [ls]); // Added 'ls' as a dependency
   
@@ -31,7 +29,6 @@ const addProduct = (productId, selectedOptions) => {
       );
 
       if (existingProductIndex > -1) {
-        console.log(`Increasing quantity for productId: ${productId}`);
         return prev.map((item, index) =>
           index === existingProductIndex
             ? {
@@ -42,7 +39,6 @@ const addProduct = (productId, selectedOptions) => {
         );
       }
 
-      console.log(`Adding new product to cart: ${productId}`);
       return [...prev, { productId, selectedOptions, quantity: 1 }];
     });
   } else {
@@ -60,7 +56,6 @@ const removeProduct = (productId, selectedOptions) => {
       if (existingProductIndex > -1) {
         const currentItem = prev[existingProductIndex];
         if (currentItem.quantity > 1) {
-          console.log(`Decreasing quantity for productId: ${productId}`);
           return prev.map((item, index) =>
             index === existingProductIndex
               ? {
@@ -70,7 +65,6 @@ const removeProduct = (productId, selectedOptions) => {
               : item
           );
         } else {
-          console.log(`Removing product from cart: ${productId}`);
           return prev.filter((item, index) => index !== existingProductIndex);
         }
       } else {
@@ -88,7 +82,6 @@ const clearCart = () => {
   setCartProducts([]); // Clear state
   if (ls) {
     ls.removeItem('cart'); // Clear local storage
-    console.log("Local storage cleared"); // Log action
   }
 };
 

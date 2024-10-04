@@ -8,7 +8,7 @@ import InfoIcon from '@mui/icons-material/Info';
 const ProductWrapper = styled.div`
   position: relative;
   width: 100%; /* Each product wrapper will take 35% of the row width */
-  height: auto;
+  height: 450px;
   aspect-ratio: 3 / 4;
   background: white;
   overflow: hidden;
@@ -177,7 +177,13 @@ const Inside = styled.div`
       width: 100%;
     }
 
-    h1, p, table {
+    h1
+      color: white;
+      @media (max-width: 768px) {
+        font-size: 9.5px; /* Adjust text size for small screens */
+    }
+
+    p, table {
       color: white;
       @media (max-width: 768px) {
         font-size: 9px; /* Adjust text size for small screens */
@@ -206,7 +212,7 @@ const WhiteBox = styled.div`
 
   img {
     width: 100%;
-    height: 100%;
+    height: ;
     object-fit: cover;
     transition: opacity 0.3s ease-in-out;
     cursor: pointer;

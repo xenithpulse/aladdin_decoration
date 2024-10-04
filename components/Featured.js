@@ -42,7 +42,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+40.png"
             alt="image2"
-            layout="responsive" // Enables responsive layout
             width={2000} // Original width
             height={750} // Original height
           />
@@ -51,7 +50,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+35.png"
             alt="image3"
-            layout="responsive"
             width={2000}
             height={750}
           />
@@ -60,7 +58,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+36.png"
             alt="image5"
-            layout="responsive"
             width={2000}
             height={750}
           />
@@ -69,7 +66,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+39.png"
             alt="image6"
-            layout="responsive"
             width={2000}
             height={750}
           />
@@ -78,7 +74,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+34.png"
             alt="image7"
-            layout="responsive"
             width={2000}
             height={750}
           />
@@ -87,7 +82,6 @@ const NextJsCarousel = () => {
           <Image
             src="https://aladdin-bucket0.s3.amazonaws.com/Frame+38.png"
             alt="image8"
-            layout="responsive"
             width={2000}
             height={750}
           />
