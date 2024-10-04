@@ -7,25 +7,35 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const ProductWrapper = styled.div`
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 100%; /* Each product wrapper will take 35% of the row width */
+  height: auto;
+  aspect-ratio: 3 / 4;
   background: white;
-  margin: auto;
   overflow: hidden;
-  border-radius: 10px;
   box-shadow: 0;
   transform: scale(1);
-  transition: box-shadow 0.5s, transform 0.5s;
+  transition: box-shadow 0.3s, transform 0.3s ease-in-out;
+  margin: 0 5px; /* Adds a margin of 10px on the left and right to ensure equal spacing */
 
   &:hover {
-    transform: scale(1.005);
-    box-shadow: 5px 10px 20px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
   }
-    @media (max-width: 768px) {
-    width: 200px; /* Stack cards one below the other on small screens */
-    height:320px;
+
+  /* Adjust layout on small screens */
+  @media (max-width: 768px) {
+    width: 350px; /* Ensuring that two product wrappers fit in a row */
+    margin: 18px; /* Same left-right margin on small screens */
+    height: 280px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%; /* Keeps two products in a row for small devices */
+    height: 250px;
+    margin: 15px; /* Same margin for small screens */
   }
 `;
+
 
 
 const Top = styled.div`
@@ -35,6 +45,10 @@ const Top = styled.div`
   background-size: cover;
   position: relative;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    height: 80%; /* Adjust for smaller screens */
+  }
 `;
 
 const Bottom = styled.div`
@@ -57,25 +71,30 @@ const Bottom = styled.div`
   .left {
     background: #f4f4f4;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     padding: 0 10px;
 
     .details {
-      padding: 20px;
+      padding: 0px;
       width: calc(70% - 40px);
-    }
 
-    .details h1 {
-      font-size: 16px;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+      h1 {
+        font-size: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
-    .details p {
-      font-size: 14px;
+        @media (max-width: 768px) {
+          font-size: 9px; /* Adjust for small screens */
+        }
+      }
+
+      p {
+        font-size: 14px;
+
+        @media (max-width: 768px) {
+          font-size: 11px; /* Adjust for small screens */
+        }
+      }
     }
 
     .buy {
@@ -83,7 +102,7 @@ const Bottom = styled.div`
       height: 100%;
       background: #f1f1f1;
       transition: background 0.5s;
-      border-left: solid thin rgba(0,0,0,0.1);
+      border-left: solid thin rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -96,61 +115,12 @@ const Bottom = styled.div`
         font-size: 30px;
         margin-bottom: 21px;
         color: #000;
-      }
-    }
-  }
 
-  .right {
-    background: #A6CDDE;
-    color: white;
-    height: 200%;
-    overflow: hidden;
-    display: flex;
-    align-items: top;
-    justify-content: space-between;
-    padding: 0 10px;
+        @media (max-width: 768px) {
+          font-size: 25px; /* Adjust for small screens */
+          margin-bottom: 75%;
 
-    .details {
-      padding: 20px;
-      width: calc(70% - 40px);
-    }
-
-    .done, .remove {
-      width: calc(30% - 2px);
-      height: 30%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: transform 0.5s;
-
-      svg {
-        font-size: 20px;
-        color: white;
-      }
-    }
-
-    .done {
-      background: #009688;
-      border-right: solid thin rgba(255,255,255,0.3);
-
-      &:hover {
-        transform: translateY(-100%);
-      }
-    }
-
-    .remove {
-      background: #BC3B59;
-      border-right: solid thin rgba(255,255,255,0.3);
-      transition: background 0.5s;
-
-      &:hover {
-        background: #9B2847;
-        transform: translateY(-100%);
-      }
-
-      svg {
-        font-size: 20px;
+        }
       }
     }
   }
@@ -162,16 +132,16 @@ const Inside = styled.div`
   width: 140px;
   height: 140px;
   position: absolute;
-  top: -70px;
-  right: -70px;
+  top: -90px;
+  right: -90px;
   border-radius: 0px 0px 200px 200px;
   transition: all 0.5s, border-radius 2s, top 1s;
   overflow: hidden;
 
   .icon {
     position: absolute;
-    right: 85px;
-    top: 85px;
+    right: 95px;
+    top: 95px;
     color: white;
     opacity: 1;
     transition: opacity 0.5s;
@@ -193,29 +163,31 @@ const Inside = styled.div`
     .contents {
       opacity: 1;
       transform: scale(1) translateY(0);
+      text-align: center;
     }
   }
 
   .contents {
-    padding: 5%;
     opacity: 0;
     transform: scale(0.5) translateY(-200%);
     transition: opacity 0.2s, transform 0.8s;
-    
-
+            
+  
     table {
-      text-align: left;
       width: 100%;
     }
 
     h1, p, table {
       color: white;
-      gap: -6px;
-
+      @media (max-width: 768px) {
+        font-size: 9px; /* Adjust text size for small screens */
     }
 
     p {
       font-size: 13px;
+
+      @media (max-width: 768px) {
+      font-size: 10px; /* Adjust text size for small screens */
 
     }
   }
@@ -238,8 +210,13 @@ const WhiteBox = styled.div`
     object-fit: cover;
     transition: opacity 0.3s ease-in-out;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      height: 150px; /* Adjust image height for small screens */
+    }
   }
 `;
+
 
 export default function ProductBox({ _id, title, price, images , properties}) {
   const { addProduct } = useContext(CartContext);
@@ -286,11 +263,11 @@ export default function ProductBox({ _id, title, price, images , properties}) {
    {
                   Object.keys(properties).map((pn)=>{
 return <>
-<h3 style={{
+<h4 style={{
   color:"white"
 }}> 
   {pn}
-</h3>
+</h4>
 <>
 {
   properties[pn].map((pp)=>{

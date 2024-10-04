@@ -9,9 +9,8 @@ import Table from "@/components/Table";
 import Input from "@/components/Input";
 import { useRouter } from "next/router";
 import { keyframes } from "styled-components";
-import Footer from "@/components/footer";
 import Image from 'next/image'
-
+import Title from "@/components/Title";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -37,6 +36,7 @@ const ProductInfoCell = styled.td`
 `;
 
 const ProductImageBox = styled.div`
+  display: flex;
   width: 120px;
   height: 120px;
   margin-right: 20px;
@@ -196,8 +196,9 @@ const PaymentOptionContainer = styled.div`
 
 const PaymentOptionTitle = styled.h3`
   display: inline-block;
-  font-size: 1.3rem; // Large font size
   margin: 0; // Remove default margin
+  font-size: 1.3rem;
+  font-weight: normal;
 `;
 
 const PaymentOptionDescription = styled.div`
@@ -251,7 +252,7 @@ export default function CartPage() {
     return acc + (price * cartItem.quantity);
   }, 0);
   
-  const shopDiscount = itemsTotal * 0.25; // Assuming a 25% shop discount
+  const shopDiscount = itemsTotal * 0.05; // Assuming a 25% shop discount
   const subtotal = itemsTotal - shopDiscount;
   
 
@@ -330,7 +331,6 @@ export default function CartPage() {
         });
   
         if (response.data.success) {
-          console.log("Order placed successfully");
           clearCart();
           setIsSuccess(true);
           localStorage.removeItem('cartProducts');
@@ -357,7 +357,7 @@ if (isSuccess) {
       <SuccessMessage>
         <TickIcon />
         <SuccessMessage_1>Thanks for your order</SuccessMessage_1>
-        <p>You will receive a call for order confirmation</p>
+        <p>Soon, You will receive a call for order confirmation</p>
       </SuccessMessage>
     </SuccessOverlay>
   );
@@ -365,14 +365,11 @@ if (isSuccess) {
 
   let total = 0;
 
-  // Add debugging to see if products are correctly set
-  console.log("Products in cart page:", products);
 
   cartProducts.forEach(cartItem => {
     const product = products.find(p => p.productId === cartItem.productId);
-    console.log("Matched product:", product);
     if (product) {
-      const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(USD\s([\d,.]+)\)/);
+      const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
       const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
       total += price * cartItem.quantity;
     }
@@ -385,7 +382,7 @@ if (isSuccess) {
 <Center>
   <ColumnsWrapper>
     <Box>
-      <h2>Cart</h2>
+      <Title>Cart</Title>
       {!cartProducts?.length && <div>Your cart is empty</div>}
       {products?.length > 0 && (
         <>
@@ -405,7 +402,7 @@ if (isSuccess) {
                 }
 
                 const quantity = cartItem.quantity || 1;
-                const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(USD\s([\d,.]+)\)/);
+                const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
                 const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
                 const totalItemPrice = price * quantity;
 
@@ -428,8 +425,8 @@ if (isSuccess) {
                       <ProductDetails>
                         <ProductTitle>{product.title}</ProductTitle>
                         <SelectedOptions>
-                          Dimensions: {cartItem.selectedOptions.Dimensions.split(' ')[0]}<br />
-                          Hands Color: {cartItem.selectedOptions.Color}
+                          Dimension: {cartItem.selectedOptions.Dimensions.split(' ')[0]}<br />
+                          Color: {cartItem.selectedOptions.Colors}
                         </SelectedOptions>
                         <ControlsContainer>
                           <QuantityControl>
@@ -437,7 +434,6 @@ if (isSuccess) {
                             <QuantityLabel>{quantity}</QuantityLabel>
                             <Button onClick={() => moreOfThisProduct(cartItem.productId, cartItem.selectedOptions)}>+</Button>
                           </QuantityControl>
-                          <EditButton onClick={() => handleEditProduct(cartItem.productId)}>Edit</EditButton>
                         </ControlsContainer>
                       </ProductDetails>
                     </ProductInfoCell>
@@ -456,7 +452,11 @@ if (isSuccess) {
             </SummaryItem>
             <SummaryItem>
               <span>Shop discount:</span>
-              <span>-PKR {shopDiscount.toFixed(2)}</span>
+              {subtotal >= 5000 ? (
+                <span>-PKR {shopDiscount.toFixed(2)}</span>
+                ) : (
+                <span> PKR 0.00</span>
+                )}
             </SummaryItem>
             <SummaryItem>
               <span>Subtotal:</span>
@@ -466,9 +466,9 @@ if (isSuccess) {
               <span>Delivery:</span>
               <span>
                 {subtotal >= 5000 ? (
-                  <>FREE <DeliveryInfo>(To Pakistan)</DeliveryInfo></>
+                  <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
                 ) : (
-                  <>PKR 99.00 <DeliveryInfo>(To Pakistan)</DeliveryInfo></>
+                  <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
                 )}
               </span>
             </SummaryItem>
@@ -485,7 +485,7 @@ if (isSuccess) {
 
           {!!cartProducts?.length && (
             <Box>
-              <h2>Order Information</h2>
+              <Title>Order Information</Title>
               <label>
                 Name<RequiredField>*</RequiredField>
               </label>
@@ -553,7 +553,7 @@ if (isSuccess) {
               {errors.country && <ErrorMessage>{errors.country}</ErrorMessage>}
 
 
-              <h2>Payment</h2>
+              <Title>Payment</Title>
 
               <PaymentOptionContainer
               isSelected={selectedPayment === 'COD'}

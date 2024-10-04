@@ -3,10 +3,8 @@ import Center from "@/homecenter";
 import {mongooseConnect} from "@/lib/mongoose";
 import {Product} from "@/models/Product";
 import ProductsGrid from "@/homepagegrid";
-import Title from "@/components/Title";
 import { Category } from "@/models/Category"; // Ensure this path is correct
-
-
+import Title from "@/components/Title";
 
 export default function Wallart({ products }) {
   return (

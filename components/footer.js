@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import {
   IoLogoFacebook,
   IoLogoInstagram,
-  IoLogoTiktok,
-  IoLogoPinterest,
 } from "react-icons/io5";
 
 // Styled component for Footer wrapper
@@ -93,17 +91,9 @@ class Footer extends Component {
           </Link>
 
           <Link href="https://www.instagram.com/aladdin_adornment/" target="_blank">
-            <IoLogoInstagram size={25} style={{ color: '#E4405F' }} />
+            <IoLogoInstagram size={25} style={{ color: 'red' }} />
           </Link>
 
-
-          <Link href="https://www.tiktok.com/@roadsaudio" target="_blank">
-            <IoLogoTiktok size={25} style={{ color: 'red' }} />
-          </Link>
-
-          <Link href="https://www.pinterest.com/@RoadsAudio" target="_blank">
-            <IoLogoPinterest size={25} style={{ color: '#FF0000' }} />
-          </Link>
         </div>
 
         {/* Footer copyright */}

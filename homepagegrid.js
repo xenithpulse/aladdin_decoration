@@ -3,19 +3,26 @@ import ProductBox from "@/components/ProductBox";
 
 const StyledProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns layout for mobile devices */
+  grid-template-columns: 1fr 1fr; /* Two columns for small devices */
   gap: 10px; /* Space between grid items */
-  margin-left: -17px;
-  margin-right: -15px;
-  
+  margin-left: -13px; /* Ensure consistent margin on both sides */
+  margin-right: 10px;
+
+  /* Tablet and larger screens: Three columns layout */
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr; /* Three columns layout for tablets and larger screens */
+    grid-template-columns: 1fr 1fr 1fr; /* Three columns for tablets */
   }
-  
+
+  /* Larger screens: Four columns layout */
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Four columns for large devices */
+  }
+
   /* Optional: Ensures grid items don't exceed their container width */
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 `;
+
 
 
 export default function ProductsGrid({products}) {

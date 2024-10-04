@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
+import Title from './Title';
 
 // Styled components for the About section
 const AboutSection = styled.section`
@@ -18,6 +19,9 @@ const AboutSection = styled.section`
     justify-content: space-between;
     max-width: 1200px;
     width: 100%;
+    @media (max-width: 768px) {
+      gap: -15px;
+    }
   }
 
   // About text section
@@ -37,6 +41,9 @@ const AboutSection = styled.section`
       font-size: 1.5rem;
       color: #fff;
       line-height: 1.5;
+      @media (max-width: 768px) {
+        font-size: 0.9rem;
+      }
     }
   }
 
@@ -57,7 +64,7 @@ const AboutSection = styled.section`
   // Media queries for responsiveness
   @media (max-width: 768px) {
     flex-direction: column;
-padding:0px 0px;
+    padding:0px 0px;
     .about-container {
       flex-direction: column;
     }
@@ -74,13 +81,14 @@ padding:0px 0px;
   }
 `;
 
+
 const AboutUs = () => {
   return (
     <AboutSection id='about-us'>
       <div className="about-container">
         {/* Left side with text */}
         <div className="about-text">
-          <h2>About Us</h2>
+          <Title>About Us</Title>
           <p>
           Aladdin-Decor is your premier destination for exquisite metal wall art and clocks in Pakistan.
           We are passionate about transforming your living spaces with captivating designs that blend artistry and functionality.
