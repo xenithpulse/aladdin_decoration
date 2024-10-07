@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Featured from "@/components/Featured";
+import NextJsCarousel from "@/components/Featured";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 import NewProducts from "@/components/NewProducts";
@@ -18,7 +18,7 @@ export default function HomePage({ newProducts }) {
       overflowX:"hidden"
     }} >
       <Header />
-      <Featured />
+      <NextJsCarousel/>
       <NewProducts products={newProducts} />
 
 

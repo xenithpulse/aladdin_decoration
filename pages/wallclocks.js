@@ -35,7 +35,7 @@ export async function getServerSideProps() {
   }
 
   // Fetch products that belong to the found category
-  const products = await Product.find({ category: category._id }, null, { sort: { '_id': -1 } });
+  const products = await Product.find({ category: category._id }, null, { sort: { '_id': 1 } });
 
   return {
     props: {

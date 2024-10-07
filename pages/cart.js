@@ -248,12 +248,11 @@ export default function CartPage() {
   const itemsTotal = cartProducts.reduce((acc, cartItem) => {
     const product = products.find(p => p.productId === cartItem.productId);
     const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
-    const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
+    const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product?.price;
     return acc + (price * cartItem.quantity);
   }, 0);
   
   const shopDiscount = itemsTotal * 0.05; // Assuming a 25% shop discount
-  const subtotal = itemsTotal - shopDiscount;
   
 
   // Fetch the product details based on cart products
@@ -404,7 +403,6 @@ if (isSuccess) {
                 const quantity = cartItem.quantity || 1;
                 const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
                 const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
-                const totalItemPrice = price * quantity;
 
                 return (
                   <tr key={index}>
@@ -423,7 +421,9 @@ if (isSuccess) {
                         )}
                       </ProductImageBox>
                       <ProductDetails>
-                        <ProductTitle>{product.title}</ProductTitle>
+                      <ProductTitle style={{ overflow: "hidden", textOverflow: 'ellipsis' }}>
+                        {product.title.length > 50 ? product.title.slice(0, 50) + "..." : product.title}
+                      </ProductTitle>
                         <SelectedOptions>
                           Dimension: {cartItem.selectedOptions.Dimensions.split(' ')[0]}<br />
                           Color: {cartItem.selectedOptions.Colors}
@@ -446,37 +446,47 @@ if (isSuccess) {
 
           {/* Order Summary Section */}
           <OrderSummary>
-            <SummaryItem>
-              <span>Item(s) total:</span>
-              <span>PKR {itemsTotal.toFixed(2)}</span>
-            </SummaryItem>
-            <SummaryItem>
-              <span>Shop discount:</span>
-              {subtotal >= 5000 ? (
-                <span>-PKR {shopDiscount.toFixed(2)}</span>
-                ) : (
-                <span> PKR 0.00</span>
-                )}
-            </SummaryItem>
-            <SummaryItem>
-              <span>Subtotal:</span>
-              <span>PKR {subtotal.toFixed(2)}</span>
-            </SummaryItem>
-            <SummaryItem>
-              <span>Delivery:</span>
-              <span>
-                {subtotal >= 5000 ? (
-                  <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
-                ) : (
-                  <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
-                )}
-              </span>
-            </SummaryItem>
-            <SummaryItem>
-              <strong>Total ({cartProducts.length} item{cartProducts.length > 1 ? 's' : ''}):</strong>
-              <strong>PKR {(subtotal >= 5000 ? subtotal : subtotal + 99).toFixed(2)}</strong>
-            </SummaryItem>
-          </OrderSummary>
+  <SummaryItem>
+    <span>Item(s) total:</span>
+    <span>PKR {itemsTotal.toFixed(2)}</span>
+  </SummaryItem>
+
+  <SummaryItem>
+    <span>Shop discount:</span>
+    {itemsTotal >= 5000 ? (
+      <span>-PKR {shopDiscount.toFixed(2)}</span>
+    ) : (
+      <span>PKR 0.00</span>
+    )}
+  </SummaryItem>
+
+  <SummaryItem>
+    <span>Subtotal:</span>
+    <span>
+      PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0)).toFixed(2)}
+    </span>
+  </SummaryItem>
+
+  <SummaryItem>
+    <span>Delivery:</span>
+    <span>
+      {itemsTotal >= 5000 ? (
+        <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
+      ) : (
+        <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
+      )}
+    </span>
+  </SummaryItem>
+
+  <SummaryItem>
+    <strong>Total ({cartProducts.length} item{cartProducts.length > 1 ? 's' : ''}):</strong>
+    <strong>
+      PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0) + (itemsTotal < 5000 ? 99 : 0)).toFixed(2)}
+    </strong>
+  </SummaryItem>
+</OrderSummary>
+
+
         </>
       )}
     </Box>
@@ -573,11 +583,11 @@ if (isSuccess) {
                   {/* Description content */}
                   1. Make your transfer to the details mentioned below<br /><br />
         
-                  <strong>Bank:</strong> MCB BANK<br />
-                  <strong>Account Title:</strong> Meer Sarmad Naeem<br />
-                  <strong>Account No:</strong> 0970-1482-3100-5222<br /><br />
+                  <strong>Bank:</strong> MEEZAN BANK<br />
+                  <strong>Account Title:</strong> SAJJAD HUSSAIN<br />
+                  <strong>Account No:</strong> 0210-0101-9047-01<br /><br />
 
-                  2. Share the screenshot of your order number and your transaction receipt at <strong>pg18tshirts@gmail.com</strong>.<br /><br />
+                  2. Share the screenshot of your transaction receipt at <strong>https://wa.link/p3muym || 0329-7511100</strong>.<br /><br />
 
                   You will receive a confirmation call from us in working hours, verifying 
                   all the details. Please make sure to mention to our representative that you
