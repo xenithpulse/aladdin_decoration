@@ -34,10 +34,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/cart.js"
     ],
-    "/product/[id]": [
+    "/homedecor": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/product/[id].js"
+      "static/chunks/pages/homedecor.js"
     ],
     "/wallclocks": [
       "static/chunks/webpack.js",

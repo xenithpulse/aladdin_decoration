@@ -5,7 +5,7 @@
   "/": "pages/index.js",
   "/wallclocks": "pages/wallclocks.js",
   "/Wallart": "pages/Wallart.js",
-  "/product/[id]": "pages/product/[id].js",
+  "/homedecor": "pages/homedecor.js",
   "/cart": "pages/cart.js",
   "/api/cart": "pages/api/cart.js"
 }

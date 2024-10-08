@@ -470,7 +470,7 @@ if (isSuccess) {
   <SummaryItem>
     <span>Delivery:</span>
     <span>
-      {itemsTotal >= 5000 ? (
+      {itemsTotal >= 2000 ? (
         <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
       ) : (
         <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>

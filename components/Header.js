@@ -179,7 +179,7 @@ export default function Header() {
             <NavLink href={'/'}>Home</NavLink>
             <NavLink href={'/wallclocks'}>Wall Clocks</NavLink>
             <NavLink href={'/Wallart'}>Wall Arts</NavLink>
-            <NavLink href="#" onClick={handleClick} scroll={false}>About Us</NavLink>
+            <NavLink href={'/homedecor'}>Home Decor</NavLink>
           </StyledNav>
 
           {/* Button for toggling mobile navigation */}
