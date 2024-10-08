@@ -1,11 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/wallclocks": "pages/wallclocks.js",
-  "/Wallart": "pages/Wallart.js",
-  "/homedecor": "pages/homedecor.js",
-  "/cart": "pages/cart.js",
-  "/api/cart": "pages/api/cart.js"
-}
+{"/_error":"pages/_error.js","/api/cart":"pages/api/cart.js","/api/hello":"pages/api/hello.js","/_document":"pages/_document.js","/cart":"pages/cart.html","/_app":"pages/_app.js","/api/checkout":"pages/api/checkout.js","/homedecor":"pages/homedecor.js","/":"pages/index.js","/Wallart":"pages/Wallart.js","/product/OtherProd":"pages/product/OtherProd.js","/wallclocks":"pages/wallclocks.js","/product/[id]":"pages/product/[id].js","/404":"pages/404.html"}
