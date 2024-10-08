@@ -2,26 +2,29 @@ import styled from 'styled-components';
 import NavLink from 'next/link';
 import Center from "@/homecenter";
 import Title from './Title';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Loader from './Loader';
 
 // Styled components
 const CategoryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /* Two columns for small devices */
-  gap: 10px; /* Space between grid items */
-  margin-left: 0px; /* Ensure consistent margin on both sides */
+  grid-template-columns: repeat(1, 1fr); 
+  gap: 10px;
+  margin-left: 0px;
   margin-right: 10px;
+  box-shadow: 0;
+  transform: scale(1);
+  transition: box-shadow 0.3s, transform 0.3s ease-in-out;
 
-  /* Tablet and larger screens: Three columns layout */
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); /* Three columns for tablets */
+    grid-template-columns: repeat(2, 1fr); 
   }
 
-  /* Larger screens: Four columns layout */
   @media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr); /* Four columns for large devices */
+    grid-template-columns: repeat(3, 1fr); 
   }
 
-  /* Optional: Ensures grid items don't exceed their container width */
   width: 100%;
   box-sizing: border-box;
 `;
@@ -33,6 +36,10 @@ const CategoryBox = styled(NavLink)`
   position: relative;
   cursor: pointer;
   text-decoration: none;
+    overflow: hidden;
+  box-shadow: 0;
+  transform: scale(1);
+  transition: box-shadow 0.3s, transform 0.3s ease-in-out;
   &:hover {
     transform: scale(1.02);
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
@@ -42,7 +49,7 @@ const CategoryBox = styled(NavLink)`
 const CategoryImage = styled.div`
   width: 100%;
   height: 100%;
-  position: relative; /* Set position to relative for the overlay */
+  position: relative;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-position: center;
@@ -57,21 +64,40 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
-  z-index: 1; /* Ensure it sits above the image but below the text */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1; 
 `;
 
 const CategoryTitle = styled.h2`
   color: white;
   font-size: 24px;
   font-weight: bold;
-  position: relative; /* Position title above the overlay */
-  z-index: 2; /* Make sure title is above overlay */
+  position: relative; 
+  z-index: 2; 
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+    };
+  }, [router]);
+
   return (
     <Center>
+      {loading && <Loader />}
       <Title>Categories</Title>
       <CategoryGrid>
         <CategoryBox href="/wallclocks" passHref>

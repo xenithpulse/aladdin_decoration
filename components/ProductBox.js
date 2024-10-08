@@ -225,15 +225,8 @@ const WhiteBox = styled.div`
 
 
 export default function ProductBox({ _id, title, price, images , properties}) {
-  const { addProduct } = useContext(CartContext);
   const [isClicked, setIsClicked] = useState(false);
   const router = useRouter();
-
-  const handleAddProduct = () => {
-    addProduct(_id);
-    setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 200); // Reset the state after the pop-out effect
-  };
 
   const handleImageClick = () => {
     router.push(`/product/${_id}`); // Navigate to the single product page

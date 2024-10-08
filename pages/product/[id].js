@@ -153,12 +153,26 @@ const ErrorMessage = styled.p`
 const PropertyTitle = styled.h4`
   margin-bottom: 5px;
 `;
+const MessageContainer = styled.div`
+  position: fixed;
+  bottom: 20%; /* Slightly above the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  opacity: 0.9;
+  z-index: 1000;
+  transition: opacity 0.4s ease;
+`;
 
 export default function ProductPage({ product }) {
   const { addProduct } = useContext(CartContext);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [errors, setErrors] = useState({});
   const [price, setPrice] = useState(product.price); // Initial price
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleOptionChange = (propertyName, value) => {
     setSelectedOptions((prevState) => ({
@@ -176,25 +190,34 @@ export default function ProductPage({ product }) {
     }
   };
 
+  
   const handleAddToCart = () => {
     const newErrors = {};
-
+  
     // Check if all required options are selected
     Object.keys(product.properties).forEach((propertyName) => {
       if (!selectedOptions[propertyName]) {
         newErrors[propertyName] = "Please select an option";
       }
     });
-
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
       setErrors({});
       // Pass the product ID and selected options to the addProduct function
       addProduct(product._id, selectedOptions); // Updated to include selectedOptions
+  
+      // Show the "Item added to cart" message
+      setShowMessage(true);
+  
+      // Hide the message after 2 seconds
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
     }
   };
-
+  
 
   const handleAddToBuy = () => {
     const newErrors = {};
@@ -335,6 +358,7 @@ export default function ProductPage({ product }) {
               >
                 Add to cart
               </Button>
+  
               <Button
                 block
                 gradient="linear-gradient(to top right, #000, #000)"
@@ -346,10 +370,17 @@ export default function ProductPage({ product }) {
                 Buy Now
               </Button>
             </AddToCartSection>
+  
+            {/* Display the message */}
+            {showMessage && (
+              <MessageContainer>
+                Item added to cart
+              </MessageContainer>
+            )}
           </ProductInfo>
         </PageWrapper>
       </Center>
-      <Footer/>
+      <Footer />
     </>
   );
 }

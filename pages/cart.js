@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import { keyframes } from "styled-components";
 import Image from 'next/image'
 import Title from "@/components/Title";
+import EmptyCart from "./emptycart";
+
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -257,8 +259,6 @@ export default function CartPage() {
 
   // Fetch the product details based on cart products
   useEffect(() => {
-    console.log("Cart products in useEffect:", cartProducts);
-
     const formattedCartProducts = cartProducts.map(product => ({
       productId: product.productId,
       selectedOptions: product.selectedOptions || {},
@@ -377,240 +377,233 @@ if (isSuccess) {
 
   return (
     <>
-<Header />
-<Center>
-  <ColumnsWrapper>
-    <Box>
-      <Title>Cart</Title>
-      {!cartProducts?.length && <div>Your cart is empty</div>}
-      {products?.length > 0 && (
-        <>
-          <Table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartProducts.map((cartItem, index) => {
-                const product = products.find(p => p.productId === cartItem.productId);
-                if (!product) {
-                  console.error("Product not found for cart item with productId:", cartItem.productId);
-                  return null;
-                }
-
-                const quantity = cartItem.quantity || 1;
-                const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
-                const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
-
-                return (
-                  <tr key={index}>
-                    <ProductInfoCell>
-                      <ProductImageBox>
-                        {product.image ? (
-                          <Image
-                            src={product.image}
-                            alt={product.title}
-                            width={500} // Set appropriate width
-                            height={500} // Set appropriate height
-                            layout="responsive" // You can adjust layout as needed
-                          />
-                        ) : (
-                          <span>No image available</span>
-                        )}
-                      </ProductImageBox>
-                      <ProductDetails>
-                      <ProductTitle style={{ overflow: "hidden", textOverflow: 'ellipsis' }}>
-                        {product.title.length > 50 ? product.title.slice(0, 50) + "..." : product.title}
-                      </ProductTitle>
-                        <SelectedOptions>
-                          Dimension: {cartItem.selectedOptions.Dimensions.split(' ')[0]}<br />
-                          Color: {cartItem.selectedOptions.Colors}
-                        </SelectedOptions>
-                        <ControlsContainer>
-                          <QuantityControl>
-                            <Button onClick={() => lessOfThisProduct(cartItem.productId, cartItem.selectedOptions)}>-</Button>
-                            <QuantityLabel>{quantity}</QuantityLabel>
-                            <Button onClick={() => moreOfThisProduct(cartItem.productId, cartItem.selectedOptions)}>+</Button>
-                          </QuantityControl>
-                        </ControlsContainer>
-                      </ProductDetails>
-                    </ProductInfoCell>
-                    <td>PKR {price.toFixed(2)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-
-          {/* Order Summary Section */}
-          <OrderSummary>
-  <SummaryItem>
-    <span>Item(s) total:</span>
-    <span>PKR {itemsTotal.toFixed(2)}</span>
-  </SummaryItem>
-
-  <SummaryItem>
-    <span>Shop discount:</span>
-    {itemsTotal >= 5000 ? (
-      <span>-PKR {shopDiscount.toFixed(2)}</span>
-    ) : (
-      <span>PKR 0.00</span>
-    )}
-  </SummaryItem>
-
-  <SummaryItem>
-    <span>Subtotal:</span>
-    <span>
-      PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0)).toFixed(2)}
-    </span>
-  </SummaryItem>
-
-  <SummaryItem>
-    <span>Delivery:</span>
-    <span>
-      {itemsTotal >= 2000 ? (
-        <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
-      ) : (
-        <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
-      )}
-    </span>
-  </SummaryItem>
-
-  <SummaryItem>
-    <strong>Total ({cartProducts.length} item{cartProducts.length > 1 ? 's' : ''}):</strong>
-    <strong>
-      PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0) + (itemsTotal < 5000 ? 99 : 0)).toFixed(2)}
-    </strong>
-  </SummaryItem>
-</OrderSummary>
-
-
-        </>
-      )}
-    </Box>
-
-
-
-          {!!cartProducts?.length && (
+      <Header />
+      <Center>
+        {/* Render the EmptyCart outside the ColumnsWrapper when the cart is empty */}
+        {!cartProducts?.length ? (
+          <EmptyCart />
+        ) : (
+          <ColumnsWrapper>
             <Box>
-              <Title>Order Information</Title>
-              <label>
-                Name<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(ev) => setName(ev.target.value)}
-              />
-              {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
-
-              <label>
-                Email<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(ev) => setEmail(ev.target.value)}
-              />
-              {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-
-              <label>
-                City<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="text"
-                placeholder="City"
-                value={city}
-                onChange={(ev) => setCity(ev.target.value)}
-              />
-              {errors.city && <ErrorMessage>{errors.city}</ErrorMessage>}
-
-              <label>
-                Phone<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="text"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(ev) => setPhone(ev.target.value)}
-              />
-              {errors.phone && <ErrorMessage>{errors.phone}</ErrorMessage>}
-
-              <label>
-                Street Address<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="text"
-                placeholder="Street Address"
-                value={streetAddress}
-                onChange={(ev) => setStreetAddress(ev.target.value)}
-              />
-              {errors.streetAddress && <ErrorMessage>{errors.streetAddress}</ErrorMessage>}
-
-              <label>
-                Country<RequiredField>*</RequiredField>
-              </label>
-              <Input
-                type="text"
-                placeholder="Country"
-                value={country}
-                onChange={(ev) => setCountry(ev.target.value)}
-              />
-              {errors.country && <ErrorMessage>{errors.country}</ErrorMessage>}
-
-
-              <Title>Payment</Title>
-
-              <PaymentOptionContainer
-              isSelected={selectedPayment === 'COD'}
-              onClick={() => handlePaymentSelection('COD')}
-              >
-              <PaymentOptionCircle isSelected={selectedPayment === 'COD'} />
-              <PaymentOptionTitle>Cash on Delivery (COD)</PaymentOptionTitle>
-              </PaymentOptionContainer>
-
-              <PaymentOptionContainer
-                isSelected={selectedPayment === 'Bank Transfer'}
-                onClick={() => handlePaymentSelection('Bank Transfer')}
-              >
-                <PaymentOptionCircle isSelected={selectedPayment === 'Bank Transfer'} />
-                <PaymentOptionTitle>Bank Transfer</PaymentOptionTitle>
-                <PaymentOptionDescription isVisible={selectedPayment === 'Bank Transfer'}>
-                  {/* Description content */}
-                  1. Make your transfer to the details mentioned below<br /><br />
-        
-                  <strong>Bank:</strong> MEEZAN BANK<br />
-                  <strong>Account Title:</strong> SAJJAD HUSSAIN<br />
-                  <strong>Account No:</strong> 0210-0101-9047-01<br /><br />
-
-                  2. Share the screenshot of your transaction receipt at <strong>https://wa.link/p3muym || 0329-7511100</strong>.<br /><br />
-
-                  You will receive a confirmation call from us in working hours, verifying 
-                  all the details. Please make sure to mention to our representative that you
-                  made an online transfer. Your order will be dispatched after that.
+              <Title>Cart</Title>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartProducts.map((cartItem, index) => {
+                    const product = products.find(p => p.productId === cartItem.productId);
+                    if (!product) {
+                      console.error("Product not found for cart item with productId:", cartItem.productId);
+                      return null;
+                    }
+  
+                    const quantity = cartItem.quantity || 1;
+                    const priceMatch = cartItem.selectedOptions.Dimensions?.match(/\(PKR\s([\d,.]+)\)/);
+                    const price = priceMatch ? parseFloat(priceMatch[1].replace(",", "")) : product.price;
+  
+                    return (
+                      <tr key={index}>
+                        <ProductInfoCell>
+                          <ProductImageBox>
+                            {product.image ? (
+                              <Image
+                                src={product.image}
+                                alt={product.title}
+                                width={500} // Set appropriate width
+                                height={500} // Set appropriate height
+                                layout="responsive" // You can adjust layout as needed
+                              />
+                            ) : (
+                              <span>No image available</span>
+                            )}
+                          </ProductImageBox>
+                          <ProductDetails>
+                            <ProductTitle style={{ overflow: "hidden", textOverflow: 'ellipsis' }}>
+                              {product.title.length > 50 ? product.title.slice(0, 50) + "..." : product.title}
+                            </ProductTitle>
+                            <SelectedOptions>
+                              Dimension: {cartItem.selectedOptions.Dimensions.split(' ')[0]}<br />
+                              Color: {cartItem.selectedOptions.Colors}
+                            </SelectedOptions>
+                            <ControlsContainer>
+                              <QuantityControl>
+                                <Button onClick={() => lessOfThisProduct(cartItem.productId, cartItem.selectedOptions)}>-</Button>
+                                <QuantityLabel>{quantity}</QuantityLabel>
+                                <Button onClick={() => moreOfThisProduct(cartItem.productId, cartItem.selectedOptions)}>+</Button>
+                              </QuantityControl>
+                            </ControlsContainer>
+                          </ProductDetails>
+                        </ProductInfoCell>
+                        <td>PKR {price.toFixed(2)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+  
+              {/* Order Summary Section */}
+              <OrderSummary>
+                <SummaryItem>
+                  <span>Item(s) total:</span>
+                  <span>PKR {itemsTotal.toFixed(2)}</span>
+                </SummaryItem>
+  
+                <SummaryItem>
+                  <span>Shop discount:</span>
+                  {itemsTotal >= 5000 ? (
+                    <span>-PKR {shopDiscount.toFixed(2)}</span>
+                  ) : (
+                    <span>PKR 0.00</span>
+                  )}
+                </SummaryItem>
+  
+                <SummaryItem>
+                  <span>Subtotal:</span>
+                  <span>
+                    PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0)).toFixed(2)}
+                  </span>
+                </SummaryItem>
+  
+                <SummaryItem>
+                  <span>Delivery:</span>
+                  <span>
+                    {itemsTotal >= 2000 ? (
+                      <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
+                    ) : (
+                      <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
+                    )}
+                  </span>
+                </SummaryItem>
+  
+                <SummaryItem>
+                  <strong>Total ({cartProducts.length} item{cartProducts.length > 1 ? 's' : ''}):</strong>
+                  <strong>
+                    PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0) + (itemsTotal < 5000 ? 99 : 0)).toFixed(2)}
+                  </strong>
+                </SummaryItem>
+              </OrderSummary>
+            </Box>
+  
+            {!!cartProducts?.length && (
+              <Box>
+                <Title>Order Information</Title>
+                <label>
+                  Name<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(ev) => setName(ev.target.value)}
+                />
+                {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+  
+                <label>
+                  Email<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(ev) => setEmail(ev.target.value)}
+                />
+                {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+  
+                <label>
+                  City<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="text"
+                  placeholder="City"
+                  value={city}
+                  onChange={(ev) => setCity(ev.target.value)}
+                />
+                {errors.city && <ErrorMessage>{errors.city}</ErrorMessage>}
+  
+                <label>
+                  Phone<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Phone Number"
+                  value={phone}
+                  onChange={(ev) => setPhone(ev.target.value)}
+                />
+                {errors.phone && <ErrorMessage>{errors.phone}</ErrorMessage>}
+  
+                <label>
+                  Street Address<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Street Address"
+                  value={streetAddress}
+                  onChange={(ev) => setStreetAddress(ev.target.value)}
+                />
+                {errors.streetAddress && <ErrorMessage>{errors.streetAddress}</ErrorMessage>}
+  
+                <label>
+                  Country<RequiredField>*</RequiredField>
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  onChange={(ev) => setCountry(ev.target.value)}
+                />
+                {errors.country && <ErrorMessage>{errors.country}</ErrorMessage>}
+  
+                <Title>Payment</Title>
+  
+                <PaymentOptionContainer
+                  isSelected={selectedPayment === 'COD'}
+                  onClick={() => handlePaymentSelection('COD')}
+                >
+                  <PaymentOptionCircle isSelected={selectedPayment === 'COD'} />
+                  <PaymentOptionTitle>Cash on Delivery (COD)</PaymentOptionTitle>
+                </PaymentOptionContainer>
+  
+                <PaymentOptionContainer
+                  isSelected={selectedPayment === 'Bank Transfer'}
+                  onClick={() => handlePaymentSelection('Bank Transfer')}
+                >
+                  <PaymentOptionCircle isSelected={selectedPayment === 'Bank Transfer'} />
+                  <PaymentOptionTitle>Bank Transfer</PaymentOptionTitle>
+                  <PaymentOptionDescription isVisible={selectedPayment === 'Bank Transfer'}>
+                    {/* Description content */}
+                    1. Make your transfer to the details mentioned below<br /><br />
+          
+                    <strong>Bank:</strong> MEEZAN BANK<br />
+                    <strong>Account Title:</strong> SAJJAD HUSSAIN<br />
+                    <strong>Account No:</strong> 0210-0101-9047-01<br /><br />
+  
+                    2. Share the screenshot of your transaction receipt at <strong>https://wa.link/p3muym || 0329-7511100</strong>.<br /><br />
+  
+                    You will receive a confirmation call from us in working hours, verifying 
+                    all the details. Please make sure to mention to our representative that you
+                    made an online transfer. Your order will be dispatched after that.
                   </PaymentOptionDescription>
                 </PaymentOptionContainer>
-
-
-    {error && <ErrorMessage>{error}</ErrorMessage>}
-
-    <Button
-      black block
-      onClick={goToPayment}
-      style={{ width: "100%", maxWidth: "600px", height: "48px" }}
-    >
-      Complete Order
-    </Button>
-
+  
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+  
+                <Button
+                  black
+                  block
+                  onClick={goToPayment}
+                  style={{ width: "100%", maxWidth: "600px", height: "48px" }}
+                >
+                  Complete Order
+                </Button>
               </Box>
-          )}
-
-        </ColumnsWrapper>
+            )}
+          </ColumnsWrapper>
+        )}
       </Center>
     </>
   );
-}
+}  

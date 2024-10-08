@@ -5,4 +5,4 @@ const CategorySchema = new Schema({
   // Add other fields if necessary
 });
 
-export const Category = models.Category || model('Category', CategorySchema);
+export const Category = models?.Category || model('Category', CategorySchema);

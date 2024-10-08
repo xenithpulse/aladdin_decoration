@@ -97,7 +97,7 @@ class Footer extends Component {
         </div>
 
         {/* Footer copyright */}
-        <p>Copyright © {current_year}, Created By XenithPulse</p>
+        <p>Copyright © {current_year}, Created By XenithPulse.com</p>
       </FooterWrapper>
     );
   }
