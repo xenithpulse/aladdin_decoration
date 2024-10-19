@@ -8,10 +8,7 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import styled from "styled-components";
 import Footer from "@/components/footer";
-<<<<<<< HEAD
 import * as fbq from "@/lib/fpixel";
-=======
->>>>>>> 10188aee1844228adf8815497eee5483e51b749f
 
 
 // Styles for the overall layout
@@ -214,10 +211,7 @@ export default function ProductPage({ product }) {
   
       // Show the "Item added to cart" message
       setShowMessage(true);
-<<<<<<< HEAD
       fbq.event("Purchase", { currency: "PKR", value: 10 })
-=======
->>>>>>> 10188aee1844228adf8815497eee5483e51b749f
   
       // Hide the message after 2 seconds
       setTimeout(() => {
@@ -246,10 +240,8 @@ export default function ProductPage({ product }) {
         
         // Redirect to cart page
         window.location.href = "/cart";
-<<<<<<< HEAD
         fbq.event("Purchase", { currency: "PKR", value: 10 })
-=======
->>>>>>> 10188aee1844228adf8815497eee5483e51b749f
+
     }
 };
 
