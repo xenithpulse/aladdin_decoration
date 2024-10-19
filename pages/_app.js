@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import { createGlobalStyle } from 'styled-components';
 import { CartContextProvider } from '@/components/CartContext';
 import Loader from '@/components/Loader'; // Import your Loader component
+<<<<<<< HEAD
 import * as fbq from "@/lib/fpixel";
 import Script from 'next/script';
 import FacebookPixel from '@/components/FacebookPixel';
 
 
+=======
+>>>>>>> 10188aee1844228adf8815497eee5483e51b749f
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -38,6 +41,7 @@ export default function App({ Component, pageProps }) {
     };
   }, [router.events]);
 
+<<<<<<< HEAD
 
   useEffect(() => {
     // This pageview only triggers the first time (it's important for Pixel to have real information)
@@ -55,11 +59,14 @@ export default function App({ Component, pageProps }) {
 
 
 
+=======
+>>>>>>> 10188aee1844228adf8815497eee5483e51b749f
   return (
     <>
       <GlobalStyles />
       {loading && <Loader />} {/* Show loader when loading */}
       <CartContextProvider>
+<<<<<<< HEAD
               {/* Global Site Code Pixel - Facebook Pixel */}
       <Script
         id="fb-pixel"
@@ -79,6 +86,8 @@ export default function App({ Component, pageProps }) {
         }}
       />
         <FacebookPixel />
+=======
+>>>>>>> 10188aee1844228adf8815497eee5483e51b749f
         <Component {...pageProps} />
       </CartContextProvider>
     </>

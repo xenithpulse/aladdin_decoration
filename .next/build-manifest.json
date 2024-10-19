@@ -1,0 +1,90 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills-42372ed130431b0a.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/Zi9DJZ3ddZIhxVzZIpy0E/_buildManifest.js",
+    "static/Zi9DJZ3ddZIhxVzZIpy0E/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "pages": {
+    "/": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/68c0a17d-82066838d208b8fa.js",
+      "static/chunks/6814153d-b7f473b7be49f0ed.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/13-f3b592d46c400b82.js",
+      "static/css/ae4ed9c503fd1e33.css",
+      "static/chunks/pages/index-3af790e865e47a81.js"
+    ],
+    "/Wallart": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/pages/Wallart-3537a74a3a712fd1.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/pages/_app-a9edc9f7a8c6637e.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/pages/_error-7a92967bea80186d.js"
+    ],
+    "/cart": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/66-c42838080a2e1f11.js",
+      "static/chunks/pages/cart-1121a4b523d1d930.js"
+    ],
+    "/emptycart": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/pages/emptycart-d5b81eded04ed315.js"
+    ],
+    "/homedecor": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/pages/homedecor-6ab4db639d4f0d2d.js"
+    ],
+    "/product/OtherProd": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/pages/product/OtherProd-fdfcf4e1fc9eb3ba.js"
+    ],
+    "/product/[id]": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/68c0a17d-82066838d208b8fa.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/13-f3b592d46c400b82.js",
+      "static/css/ae4ed9c503fd1e33.css",
+      "static/chunks/pages/product/[id]-bbdeb580d8f8276a.js"
+    ],
+    "/wallclocks": [
+      "static/chunks/webpack-2df7a8d27de1794c.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-723a52f81a2b937b.js",
+      "static/chunks/839-887eeffac9188d03.js",
+      "static/chunks/pages/wallclocks-3a6e2d54bfea571a.js"
+    ]
+  },
+  "ampFirstPages": []
+}
