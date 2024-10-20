@@ -12,7 +12,7 @@ import Image from "next/image";
 // Styled component for the header
 const StyledHeader = styled.header`
   background-color: #000000;
-  height: 62px;
+  height: 64px;
   position: fixed; /* Make header fixed */
   top: 0; /* Stick to the top */
   left: 0;
@@ -28,7 +28,7 @@ const Logo = styled(Link)`
   text-decoration: none;
   position: absolute;
   left: 40px;
-  top: 50%;
+  top: 53%;
   transform: translateY(-50%);
   z-index: 3;
 

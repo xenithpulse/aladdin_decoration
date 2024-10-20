@@ -2,13 +2,14 @@ import Center from "@/components/productpagecenter";
 import Header from "@/components/Header";
 import ImageCarousel from "@/components/ImageCarousel"; // Updated ImageCarousel component
 import Button from "@/components/CustomButton";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "@/components/CartContext";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import styled from "styled-components";
 import Footer from "@/components/footer";
-import * as fbq from "@/lib/fpixel";
+import FacebookPixel from '@/components/FacebookPixel'; // Import the new FacebookPixel component
+
 
 
 // Styles for the overall layout
@@ -172,7 +173,7 @@ export default function ProductPage({ product }) {
   const { addProduct } = useContext(CartContext);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [errors, setErrors] = useState({});
-  const [price, setPrice] = useState(product.price); // Initial price
+  const [price, setPrice] = useState(product.price);
   const [showMessage, setShowMessage] = useState(false);
 
   const handleOptionChange = (propertyName, value) => {
@@ -181,24 +182,21 @@ export default function ProductPage({ product }) {
       [propertyName]: value,
     }));
 
-    // Update price based on selected Dimensions
-    if (propertyName.toLowerCase() === "dimensions") {
+    if (propertyName.toLowerCase() === 'dimensions') {
       const selectedOption = value;
       const priceMatch = selectedOption.match(/\(PKR\s([\d,.]+)\)/);
       if (priceMatch) {
-        setPrice(priceMatch[1].replace(",", ""));
+        setPrice(priceMatch[1].replace(',', ''));
       }
     }
   };
 
-  
   const handleAddToCart = () => {
     const newErrors = {};
   
-    // Check if all required options are selected
     Object.keys(product.properties).forEach((propertyName) => {
       if (!selectedOptions[propertyName]) {
-        newErrors[propertyName] = "Please select an option";
+        newErrors[propertyName] = 'Please select an option';
       }
     });
   
@@ -206,46 +204,62 @@ export default function ProductPage({ product }) {
       setErrors(newErrors);
     } else {
       setErrors({});
-      // Pass the product ID and selected options to the addProduct function
-      addProduct(product._id, selectedOptions); // Updated to include selectedOptions
-  
-      // Show the "Item added to cart" message
+      addProduct(product._id, selectedOptions);
       setShowMessage(true);
-      fbq.event("Purchase", { currency: "PKR", value: 10 })
   
-      // Hide the message after 2 seconds
+      // Track 'AddToCart' event without re-initializing
+      if (typeof window !== 'undefined') {
+        import('react-facebook-pixel').then((module) => {
+          const ReactPixel = module.default;
+          ReactPixel.track('AddToCart', {
+            content_name: product.title,
+            content_category: product.category,
+            content_ids: [product._id], // Use the correct product ID
+            value: price,
+            currency: 'PKR',
+          });
+        });
+      }
+  
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
     }
   };
   
-
   const handleAddToBuy = () => {
     const newErrors = {};
-
-    // Check if all required options are selected
+  
     Object.keys(product.properties).forEach((propertyName) => {
-        if (!selectedOptions[propertyName]) {
-            newErrors[propertyName] = "Please select an option";
-        }
+      if (!selectedOptions[propertyName]) {
+        newErrors[propertyName] = 'Please select an option';
+      }
     });
-
+  
     if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
+      setErrors(newErrors);
     } else {
-        setErrors({});
-        // Pass the product ID and selected options to the addProduct function
-        addProduct(product._id, selectedOptions); // Updated to include selectedOptions
-        
-        // Redirect to cart page
-        window.location.href = "/cart";
-        fbq.event("Purchase", { currency: "PKR", value: 10 })
-
+      setErrors({});
+      addProduct(product._id, selectedOptions);
+  
+      // Redirect to cart page and track the event
+      if (typeof window !== 'undefined') {
+        import('react-facebook-pixel').then((module) => {
+          const ReactPixel = module.default;
+          ReactPixel.track('Buy Now', {
+            content_name: product.title,
+            content_category: product.category,
+            content_ids: [product._id], // Use the correct product ID
+            value: price,
+            currency: 'PKR',
+          });
+  
+          window.location.href = '/cart';
+        });
+      }
     }
-};
-
-
+  };
+  
 
   const getFormattedDescription = () => {
     const highlights = [];
@@ -385,6 +399,7 @@ export default function ProductPage({ product }) {
         </PageWrapper>
       </Center>
       <Footer />
+      <FacebookPixel pixelId="1258599458669427" /> {/* Add Facebook Pixel component */}
     </>
   );
 }

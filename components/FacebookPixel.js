@@ -1,31 +1,20 @@
-"use client";
+// components/FacebookPixel.js
+import { useEffect } from 'react';
 
-import { usePathname } from "next/navigation";
-import Script from "next/script";
-import { useEffect, useState } from "react";
-import * as pixel from "@/lib/fpixel";
-
-const FacebookPixel = () => {
-  const [loaded, setLoaded] = useState(false);
-  const pathname = usePathname();
-
+const FacebookPixel = ({ pixelId }) => {
   useEffect(() => {
-    if (!loaded) return;
+    const loadFacebookPixel = async () => {
+      if (typeof window !== 'undefined') {
+        console.log("Initializing Facebook Pixel"); // Log when initializing
+        const ReactPixel = (await import('react-facebook-pixel')).default;
+        ReactPixel.init(pixelId);
+        ReactPixel.pageView();
+      }
+    };
+    loadFacebookPixel();
+  }, [pixelId]);  
 
-    pixel.pageview();
-  }, [pathname, loaded]);
-
-  return (
-    <div>
-      <Script
-        id="fb-pixel"
-        src="/scripts/pixel.js"
-        strategy="afterInteractive"
-        onLoad={() => setLoaded(true)}
-        data-pixel-id={pixel.FB_PIXEL_ID}
-      />
-    </div>
-  );
+  return null; // This component does not render anything
 };
 
 export default FacebookPixel;

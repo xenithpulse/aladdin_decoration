@@ -284,7 +284,6 @@ return <>
                }
                </>
           </div>
-        )
        </Inside> } 
       <WhiteBox>
         <img src={images?.[0]} alt={title} onClick={handleImageClick} />
