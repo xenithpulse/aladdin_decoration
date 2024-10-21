@@ -176,6 +176,8 @@ export default function ProductPage({ product }) {
   const [price, setPrice] = useState(product.price);
   const [showMessage, setShowMessage] = useState(false);
 
+  const Pixel_ID = process.env.PIXEL_ID
+
   const handleOptionChange = (propertyName, value) => {
     setSelectedOptions((prevState) => ({
       ...prevState,
@@ -399,7 +401,7 @@ export default function ProductPage({ product }) {
         </PageWrapper>
       </Center>
       <Footer />
-      <FacebookPixel pixelId="1258599458669427" /> {/* Add Facebook Pixel component */}
+      <FacebookPixel pixelId="1730396151061539" /> {/* Add Facebook Pixel component */}
     </>
   );
 }

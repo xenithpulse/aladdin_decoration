@@ -18,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
 export default function App({ Component, pageProps }) {
   const router = useRouter(); // Use useRouter here
   const [loading, setLoading] = useState(false);
+  const Pixel_ID = "1730396151061539"
 
   useEffect(() => {
     const handleStart = () => setLoading(true);
@@ -55,7 +56,8 @@ export default function App({ Component, pageProps }) {
         s.parentNode.insertBefore(t,s);
       }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-      fbq('init', '1258599458669427'); // Replace with your Pixel ID
+      fbq('init', Pixel_ID); // Replace with your Pixel ID
+      console.log("process?: ", Pixel_ID)
       fbq('track', 'PageView');
 
       // Track route changes as page views

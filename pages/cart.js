@@ -578,8 +578,8 @@ if (isSuccess) {
                     1. Make your transfer to the details mentioned below<br /><br />
           
                     <strong>Bank:</strong> MEEZAN BANK<br />
-                    <strong>Account Title:</strong> SAJJAD HUSSAIN<br />
-                    <strong>Account No:</strong> 0210-0101-9047-01<br /><br />
+                    <strong>Account Title:</strong> TAHIR SALEEM<br />
+                    <strong>Account No:</strong> 0210-0101-5212-65<br /><br />
   
                     2. Share the screenshot of your transaction receipt at <strong>https://wa.link/p3muym || 0329-7511100</strong>.<br /><br />
   
