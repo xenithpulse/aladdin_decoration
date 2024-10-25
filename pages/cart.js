@@ -471,7 +471,7 @@ if (isSuccess) {
                 <SummaryItem>
                   <span>Delivery:</span>
                   <span>
-                    {itemsTotal >= 2000 ? (
+                    {itemsTotal >= 3000 ? (
                       <>FREE <DeliveryInfo>(Pakistan)</DeliveryInfo></>
                     ) : (
                       <>PKR 99.00 <DeliveryInfo>(Pakistan)</DeliveryInfo></>
@@ -482,7 +482,7 @@ if (isSuccess) {
                 <SummaryItem>
                   <strong>Total ({cartProducts.length} item{cartProducts.length > 1 ? 's' : ''}):</strong>
                   <strong>
-                    PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0) + (itemsTotal < 5000 ? 99 : 0)).toFixed(2)}
+                    PKR {(itemsTotal - (itemsTotal >= 5000 ? shopDiscount : 0) + (itemsTotal < 3000 ? 99 : 0)).toFixed(2)}
                   </strong>
                 </SummaryItem>
               </OrderSummary>

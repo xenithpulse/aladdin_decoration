@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
   IoLogoFacebook,
   IoLogoInstagram,
+  IoLogoWhatsapp,
 } from "react-icons/io5";
 
 // Styled component for Footer wrapper
@@ -92,6 +93,10 @@ class Footer extends Component {
 
           <Link href="https://www.instagram.com/aladdin_adornment/" target="_blank">
             <IoLogoInstagram size={25} style={{ color: 'red' }} />
+          </Link>
+
+          <Link href="https://wa.link/p3muym" target="_blank">
+            <IoLogoWhatsapp size={25} style={{ color: 'green' }} />
           </Link>
 
         </div>

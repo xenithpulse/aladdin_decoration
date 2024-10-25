@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components/FacebookPixel.js -> react-facebook-pixel\":{\"id\":\"components/FacebookPixel.js -> react-facebook-pixel\",\"files\":[\"static/chunks/node_modules_react-facebook-pixel_dist_fb-pixel_js.js\"]},\"pages/product/[id].js -> react-facebook-pixel\":{\"id\":\"pages/product/[id].js -> react-facebook-pixel\",\"files\":[\"static/chunks/node_modules_react-facebook-pixel_dist_fb-pixel_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{}"
